@@ -1,0 +1,27 @@
+.user {
+    border-bottom: 1px solid silver;
+    height: 24% ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user_header{
+    display: flex;
+}
+.user_logo{
+    width: 35px;
+    height: 35px;
+    border: 1px solid silver;
+    box-sizing: border-box;
+    border-radius: 50%;
+}
+
+.user_message {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+.user_date {
+    font-size: 12px;
+}
