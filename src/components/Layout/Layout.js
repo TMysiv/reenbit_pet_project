@@ -11,7 +11,6 @@ const Layout = () => {
                 <Users/>
             </div>
             <div className={'wrap_outlet'}>
-                dsadsadasl;dl;asd;a;ld
                 <Outlet/>
             </div>
         </div>

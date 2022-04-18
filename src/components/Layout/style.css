@@ -8,11 +8,12 @@
     max-width: 1200px;
     height: 500px;
    display: flex;
+    border-bottom: 2px solid silver;
 }
 .wrap_main{
     width: 30%;
+    border-right: 1px solid silver;
 }
 .wrap_outlet{
     width: 70%;
-    border: 1px solid green;
 }
