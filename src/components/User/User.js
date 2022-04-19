@@ -4,13 +4,18 @@ import {Link} from "react-router-dom";
 import css from './style.css';
 import logo from '../../images/Users-User-icon.png';
 import check from '../../images/free-png.ru-39.png';
+import {useSelector} from "react-redux";
 
 const User = ({user}) => {
 
-    const {id,name,messages} = user;
+    const {id,name} = user;
+
+    const {messages} = useSelector(state => state['userReducer']);
+
+    const userMessages = messages.filter(message => message.userId === id);
 
     return (
-            <Link to={id.toString()} state={user} >
+            <Link to={`user=${name}`} state={user} >
         <div className={'user'}>
                 <div className={'user_header'}>
 
@@ -21,13 +26,13 @@ const User = ({user}) => {
 
                     <div className={'user_message'}>
                         <h4>{name}</h4>
-                        {messages[messages.length-1].text}
+                        {userMessages[userMessages.length-1].text}
                     </div>
 
                 </div>
 
                 <div className={'user_date'}>
-                    {messages[messages.length-1].date}
+                    {userMessages[userMessages.length-1].date}
                 </div>
 
         </div>

@@ -2,13 +2,15 @@ import React from 'react';
 import {useLocation} from "react-router-dom";
 
 import check from '../../images/free-png.ru-39.png'
-
 import css from './style.css';
+import {MessagesForm} from "../MessagesForm/MessagesForm";
 
 const UserDetails = () => {
 
     const {state} = useLocation();
     const {id,name} = state;
+
+
     return (
         <div className={'details_wrap'}>
 
@@ -26,12 +28,7 @@ const UserDetails = () => {
             </div>
 
             <div className={'details_bottom'}>
-
-                <form>
-                    <input type="text" placeholder={'Type your message'}/>
-                    <button type={'submit'}></button>
-                </form>
-
+                <MessagesForm id={id}/>
             </div>
         </div>
     );
