@@ -10,8 +10,7 @@ const userSlice = createSlice({
     reducers:{
         createMessage: (state,action) =>{
             const user = users.find(user => user.id === action.payload.newMessage.userId);
-            console.log(user)
-            user.lastMessage = 5;
+
             state.messages.push(action.payload.newMessage);
         }
 

@@ -19,7 +19,7 @@ const MessagesForm = ({id}) => {
 
     //create different times
     const date = dayjs().utc().format('MMM DD,YYYY');
-    const fullTime = dayjs().utc().format('M/D/YY, HH:MM A');
+    const fullTime = dayjs().utc().format('M/D/YY, HH:mm A');
     const lastMessage = new Date().getTime();
 
     //send Message
