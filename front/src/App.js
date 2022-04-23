@@ -4,6 +4,7 @@ import {Route, Routes} from 'react-router-dom';
 import {Layout, UserDetails} from "./components";
 
 const App = () => {
+
     return (
         <>
             <Routes>
