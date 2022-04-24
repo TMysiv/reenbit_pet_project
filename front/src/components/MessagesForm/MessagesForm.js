@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useForm} from "react-hook-form";
 import {useDispatch, useSelector} from "react-redux";
 import dayjs from "dayjs";
 import utc from 'dayjs/plugin/utc';
 
 import {createMessage} from "../../store";
+import usersService from "../../services/usersService";
+import messagesService from "../../services/messagesService";
 
 dayjs.extend(utc)
 
@@ -33,6 +35,16 @@ const MessagesForm = ({id}) => {
 
         reset();
     }
+
+    useEffect(()=>{
+        usersService.getAllUsers().then(value => {
+            console.log(value)
+        })
+
+        messagesService.getAllMessages().then(value => {
+            console.log(value)
+        })
+    },[])
 
     return (
         <div>

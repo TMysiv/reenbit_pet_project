@@ -1,19 +1,29 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {messages, users} from "../constans";
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import usersService from "../services/usersService";
+
+export const getAllUsers = createAsyncThunk(
+    'userSlice/getAllUsers',
+    async (_,{rejectWithValue}) => {
+        try {
+            const users = await usersService.getAllUsers();
+            return {users}
+        }catch (e) {
+            return rejectWithValue(e.message)
+        }
+
+    }
+)
 
 const userSlice = createSlice({
     name: 'userSlice',
     initialState: {
-        users,
-        messages
+        users:[],
     },
-    reducers:{
-        createMessage: (state,action) =>{
-            const user = users.find(user => user.id === action.payload.newMessage.userId);
-
-            state.messages.push(action.payload.newMessage);
+    reducers: {},
+    extraReducers:{
+        [getAllUsers.fulfilled]: (state, action) => {
+            state.users = action.payload.users
         }
-
     }
 })
 

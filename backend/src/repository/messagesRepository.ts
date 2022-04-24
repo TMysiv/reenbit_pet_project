@@ -11,6 +11,10 @@ class MessagesRepository extends Repository<Messages>{
         return getManager().getRepository(Messages).save(messages)
     }
 
+    public async getAllMessages():Promise<IMessages[]>{
+        return getManager().getRepository(Messages).find()
+    }
+
 }
 
 export const messagsRepository = new MessagesRepository();

@@ -1,20 +1,32 @@
-import React, {useState} from 'react';
-import {useSelector} from "react-redux";
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
 
 import css from './style.css';
 import {User} from "../User/User";
 import logo from '../../images/Users-User-icon.png';
 import check from '../../images/free-png.ru-39.png';
+import {getAllUsers} from "../../store";
 
 const Users = () => {
-    const {users} = useSelector(state => state['userReducer']);
     const {handleSubmit,register} = useForm();
+    const {users} = useSelector(state => state['userReducer']);
+
+    const dispatch = useDispatch();
+
+    useEffect( () => {
+         dispatch(getAllUsers());
+    },[]);
+
+    console.log(users)
 
     //sort users by time of last message received
     const sortedOfLastMessageUsers = users.slice().sort((b, a) => b.lastMessage - a.lastMessage);
+    console.log(sortedOfLastMessageUsers)
 
     const [usersFromFilter,setUsersFromFilter] = useState(sortedOfLastMessageUsers);
+
+    console.log(usersFromFilter)
 
     //filter user if we receive something in input(search)
     const filterUsers = (data) => {
@@ -24,6 +36,7 @@ const Users = () => {
         };
         setUsersFromFilter(filterArray);
     }
+    console.log(usersFromFilter)
 
     return (
         <div className={'main'}>

@@ -7,8 +7,9 @@ import check from '../../images/free-png.ru-39.png';
 import {useSelector} from "react-redux";
 
 const User = ({user}) => {
-
+    console.log(user)
     const {id,name} = user;
+
 
     const {messages} = useSelector(state => state['userReducer']);
 
