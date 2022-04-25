@@ -7,11 +7,9 @@ import check from '../../images/free-png.ru-39.png';
 import {useSelector} from "react-redux";
 
 const User = ({user}) => {
-    console.log(user)
     const {id,name} = user;
 
-
-    const {messages} = useSelector(state => state['userReducer']);
+    const {messages} = useSelector(state => state['messageReducer']);
 
     const userMessages = messages.filter(message => message.userId === id);
 
@@ -21,7 +19,7 @@ const User = ({user}) => {
                 <div className={'user_header'}>
 
                     <div className={'user_logo'}>
-                        <img className={'logo'} src={logo} alt="logo"/>
+                        <img className={'logo'} src={logo} alt="фвв"/>
                         <img className={'check'} src={check} alt='check'/>
                     </div>
 

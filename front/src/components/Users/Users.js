@@ -1,42 +1,30 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
 
 import css from './style.css';
 import {User} from "../User/User";
 import logo from '../../images/Users-User-icon.png';
 import check from '../../images/free-png.ru-39.png';
-import {getAllUsers} from "../../store";
+import usersService from "../../services/usersService";
 
 const Users = () => {
     const {handleSubmit,register} = useForm();
-    const {users} = useSelector(state => state['userReducer']);
 
-    const dispatch = useDispatch();
+    const [users,setUsers] = useState([]);
+    const [value,setValue] = useState('');
 
-    useEffect( () => {
-         dispatch(getAllUsers());
-    },[]);
+    useEffect(()=>{
+        usersService.getAllUsers().then(users => {
+            const sortUsers = users.slice().sort((b, a) => b.lastMessage - a.lastMessage);
+            setUsers(sortUsers)
+        })
+    },[])
 
-    console.log(users)
-
-    //sort users by time of last message received
-    const sortedOfLastMessageUsers = users.slice().sort((b, a) => b.lastMessage - a.lastMessage);
-    console.log(sortedOfLastMessageUsers)
-
-    const [usersFromFilter,setUsersFromFilter] = useState(sortedOfLastMessageUsers);
-
-    console.log(usersFromFilter)
-
-    //filter user if we receive something in input(search)
     const filterUsers = (data) => {
-        let filterArray = [...sortedOfLastMessageUsers];
-        if (data.search) {
-            filterArray = filterArray.filter(user => user.name.toLowerCase().includes(data.search.toLowerCase()));
-        };
-        setUsersFromFilter(filterArray);
+        setValue(data.search)
     }
-    console.log(usersFromFilter)
+
+    const usersFromFilter = users.filter(user => user.name.toLowerCase().includes(value.toLowerCase()))
 
     return (
         <div className={'main'}>
@@ -58,7 +46,7 @@ const Users = () => {
 
                 <h2>Chats</h2>
                 <div className={'main_bottom_user'}>
-                    {usersFromFilter.map(user => <User key={user.id} user={user}/>)}
+                        {usersFromFilter.map(user => <User key={user.id} user={user}/>)}
                 </div>
 
             </div>
