@@ -2,8 +2,8 @@ import React from 'react';
 import {Outlet} from "react-router-dom";
 
 import {Users} from "../Users/Users";
-import {Constants} from "../Constants/Constants";
 import css from './style.css'
+import Constants from "../Constants/Constants";
 
 const Layout = () => {
     return (

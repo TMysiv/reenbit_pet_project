@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
 import {useDispatch} from "react-redux";
-
 import {getAllMessages} from "../../store/messagesSlice";
 
 const Constants = () => {
     const dispatch = useDispatch();
 
-    useEffect( () => {
+    useEffect(()=>{
         dispatch(getAllMessages())
     },[])
+
 
     return (
         <div>
@@ -17,4 +17,4 @@ const Constants = () => {
     );
 };
 
-export {Constants};
+export default Constants;

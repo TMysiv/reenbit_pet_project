@@ -17,7 +17,7 @@ export const getAllMessages = createAsyncThunk(
 
 export const createMessage = createAsyncThunk(
     'messageSlice/createMessage',
-    async (message,{rejectWithValue}) =>{
+    async ({message},{rejectWithValue}) =>{
         try {
             const newMessage = await messagesService.createMessage(message);
             return {newMessage}
@@ -38,7 +38,7 @@ const messageSlice = createSlice({
             state.messages = action.payload.messages
         },
         [createMessage.fulfilled]: (state, action) => {
-            state.messages.push(action.payload.newMessage)
+            state.messages.push(action.payload.newMessage);
         }
     }
 })

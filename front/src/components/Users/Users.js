@@ -6,19 +6,24 @@ import {User} from "../User/User";
 import logo from '../../images/Users-User-icon.png';
 import check from '../../images/free-png.ru-39.png';
 import usersService from "../../services/usersService";
+import {useSelector} from "react-redux";
+
 
 const Users = () => {
+
+    const {messages} = useSelector(state => state['messageReducer']);
     const {handleSubmit,register} = useForm();
 
     const [users,setUsers] = useState([]);
     const [value,setValue] = useState('');
 
     useEffect(()=>{
+
         usersService.getAllUsers().then(users => {
-            const sortUsers = users.slice().sort((b, a) => b.lastMessage - a.lastMessage);
+            const sortUsers = users.slice().sort((b, a) => a.lastMessage - b.lastMessage);
             setUsers(sortUsers)
         })
-    },[])
+    },[messages.length])
 
     const filterUsers = (data) => {
         setValue(data.search)
@@ -46,7 +51,7 @@ const Users = () => {
 
                 <h2>Chats</h2>
                 <div className={'main_bottom_user'}>
-                        {usersFromFilter.map(user => <User key={user.id} user={user}/>)}
+                        {usersFromFilter.map(user => <User key={user.id} user={user} messages={messages}/>)}
                 </div>
 
             </div>

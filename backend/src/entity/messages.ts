@@ -16,6 +16,7 @@ export class Messages extends CommonFields implements IMessages{
     @Column({
         type: 'int',
         nullable: false,
+        default: 1
     })
         userId: number;
 

@@ -1,24 +1,21 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import dayjs from "dayjs";
 import utc from 'dayjs/plugin/utc';
+import {createMessage} from "../../store/messagesSlice";
+import answerService from "../../services/answerService";
 
 dayjs.extend(utc)
 
 const MessagesForm = ({id}) => {
 
-    const {users,messages} = useSelector(state => state['userReducer']);
-    console.log(users,messages)
-
     const dispatch = useDispatch();
-
     const {handleSubmit, register, reset} = useForm();
 
     //create different times
     const date = dayjs().utc().format('MMM DD,YYYY');
     const fullTime = dayjs().utc().format('M/D/YY, HH:mm A');
-    const lastMessage = new Date().getTime();
 
     //send Message
     const sendMessage = (data) => {
@@ -26,6 +23,16 @@ const MessagesForm = ({id}) => {
             console.log('no message');
             return;
         }
+        const message = {userId: id, text: data.message, date, fullTime}
+        dispatch(createMessage({message}))
+        reset()
+
+        setTimeout(()=>{
+            answerService.getAnswer().then(answer => {
+                const message = {userId: id, text: answer.value, date, fullTime, messageFromApi: 'yes'}
+                dispatch(createMessage({message}))
+            })
+          },3000)
     }
 
     return (
